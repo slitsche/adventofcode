@@ -4,7 +4,6 @@
 (defn kmp [input idx buffer]
   (let [c (get input idx)
         buf  (conj buffer c)]
-    (println idx (get input idx))
     (if (= (count buf) (count (set buf)))
       buf
       (subvec buf 1))))
