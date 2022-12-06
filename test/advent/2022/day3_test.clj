@@ -4,10 +4,6 @@
             [clojure.set :as set]))
 
 
-(deftest compartment
-  (testing "split rucksack into compartments"
-    (is (= ["abc" "def"] (sut/compartments "abcdef")))))
-
 (deftest wrong-item
   (testing "find overlap character"
     (is (= \b (sut/wrong-item "abvb")))
