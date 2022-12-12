@@ -38,7 +38,21 @@
 
 (deftest neighbours
   (testing "getting all neighbours"
-    (is (= [[0 1]] (sut/neighbours [1 1] :left grid)))
-    (is (= [[1 0]] (sut/neighbours [1 1] :up grid)))
-    (is (= [[2 1] [3 1] [4 1]] (sut/neighbours [1 1] :right grid)))
-    (is (= [[1 2] [1 3] [1 4]] (sut/neighbours [1 1] :down  grid)))))
+    (is (= [[1 0]] (sut/neighbours [1 1] :left grid)))
+    (is (= [[0 1]] (sut/neighbours [1 1] :up grid)))
+    (is (= [[2 1] [3 1] [4 1]] (sut/neighbours [1 1] :down grid)))
+    (is (= [[1 2] [1 3] [1 4]] (sut/neighbours [1 1] :right  grid)))
+    ;; we expect the order from inner most to outer most for scenic-score
+    (is (= [[1 2] [0 2]] (sut/neighbours [2 2] :up grid)))
+    (is (= [[3 3] [3 4]] (sut/neighbours [3 2] :right grid)))))
+
+
+(deftest scenic-score
+  (testing "calc score for one tree"
+    (is (= 4 (sut/scenic-score [1 2] grid)))
+    (is (= 8 (sut/scenic-score [3 2] grid)))))
+
+(deftest scenic-score-dir
+  (testing "special case?"
+    (is (= 2
+           (sut/scenic-score-dir [3 2] :right grid)))))
